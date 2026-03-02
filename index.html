@@ -3,122 +3,1703 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sites - Social Content Sharing Platform</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/modals.css">
-    
-    <!-- JavaScript Modules -->
-    <script type="module" src="js/main.js"></script>
+    <title>Sites</title>
+    <style>
+        :root[data-theme="default"] {
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-card: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-meta: #999;
+            --accent-primary: #667eea;
+            --button-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: rgba(0,0,0,0.2);
+        }
+
+        :root[data-theme="default"][data-inverted="true"] {
+            --bg-primary: linear-gradient(135deg, #333 0%, #666 100%);
+            --bg-card: #764ba2;
+            --text-primary: white;
+            --text-secondary: #e0e0e0;
+            --text-meta: #ccc;
+            --accent-primary: white;
+            --button-primary: linear-gradient(135deg, #333 0%, #666 100%);
+            --shadow: rgba(0,0,0,0.5);
+        }
+
+        :root[data-theme="orange"] {
+            --bg-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-meta: #999999;
+            --accent-primary: #ff6b35;
+            --button-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --shadow: rgba(0,0,0,0.5);
+        }
+
+        :root[data-theme="orange"][data-inverted="true"] {
+            --bg-primary: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            --bg-card: #ff6b35;
+            --text-primary: #1a1a1a;
+            --text-secondary: #333;
+            --text-meta: #555;
+            --accent-primary: #1a1a1a;
+            --button-primary: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            --shadow: rgba(255,107,53,0.3);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-card: #0f3460;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-meta: #808080;
+            --accent-primary: #00adb5;
+            --button-primary: linear-gradient(135deg, #00adb5 0%, #00fff5 100%);
+            --shadow: rgba(0,0,0,0.7);
+        }
+
+        :root[data-theme="dark"][data-inverted="true"] {
+            --bg-primary: linear-gradient(135deg, #00adb5 0%, #00fff5 100%);
+            --bg-card: #1a1a2e;
+            --text-primary: #00fff5;
+            --text-secondary: #00adb5;
+            --text-meta: #008b94;
+            --accent-primary: #e0e0e0;
+            --button-primary: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            --shadow: rgba(0,173,181,0.3);
+        }
+
+        /* Phase 4 Theme Presets */
+        :root[data-theme="ocean"] {
+            --bg-primary: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            --bg-card: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-meta: #999;
+            --accent-primary: #00b4db;
+            --accent-secondary: #0083b0;
+            --button-primary: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            --shadow: rgba(0,131,176,0.2);
+        }
+
+        :root[data-theme="forest"] {
+            --bg-primary: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            --bg-card: white;
+            --text-primary: #2d5016;
+            --text-secondary: #4a7c2c;
+            --text-meta: #7a9d64;
+            --accent-primary: #56ab2f;
+            --accent-secondary: #a8e063;
+            --button-primary: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            --shadow: rgba(86,171,47,0.2);
+        }
+
+        :root[data-theme="sunset"] {
+            --bg-primary: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            --bg-card: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-meta: #999;
+            --accent-primary: #ff6b6b;
+            --accent-secondary: #feca57;
+            --button-primary: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            --shadow: rgba(255,107,107,0.2);
+        }
+
+        :root[data-theme="midnight"] {
+            --bg-primary: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --bg-card: white;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --text-meta: #7f8c8d;
+            --accent-primary: #3498db;
+            --accent-secondary: #2c3e50;
+            --button-primary: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --shadow: rgba(52,152,219,0.2);
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: background 0.3s;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .auth-modal, .settings-modal, .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .auth-modal.hidden, .settings-modal.hidden, .game-modal.hidden {
+            display: none;
+        }
+
+        .auth-box, .settings-box {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .game-modal-content {
+            background: var(--bg-card);
+            border-radius: 15px;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .game-modal-header {
+            padding: 20px;
+            background: var(--button-primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-action-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .modal-action-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .game-modal-body {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .iframe-error {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .iframe-error.show {
+            display: block;
+        }
+
+        .open-external-btn {
+            background: var(--button-primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Star Rating Styles */
+        .star-rating {
+            display: inline-flex;
+            gap: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .star {
+            color: #ddd;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .star.filled {
+            color: #ffd700;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .average-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--text-meta);
+        }
+
+        /* Tag Styles */
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tag.removable {
+            padding-right: 8px;
+        }
+
+        .tag .remove {
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Verified Badge */
+        .verified-badge {
+            display: inline-block;
+            background: #1da1f2;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            text-align: center;
+            line-height: 18px;
+            font-size: 12px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        /* Notification Styles */
+        .notification-item {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-primary);
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .notification-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .notification-item.unread {
+            background: rgba(102, 126, 234, 0.05);
+            font-weight: bold;
+        }
+
+        .notification-item.read {
+            opacity: 0.7;
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .badge.rare {
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+        }
+
+        .badge.epic {
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+            color: white;
+        }
+
+        .badge.legendary {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(255, 107, 107, 0.8);
+            }
+        }
+
+        /* Reactions Styles (Phase 3) */
+        .reaction-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .reaction-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-primary);
+        }
+
+        .reaction-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        /* Thumbnail Styles */
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .post-thumbnail:hover {
+            transform: scale(1.02);
+        }
+
+        /* Collections Styles */
+        .collection-item {
+            padding: 15px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .collection-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .auth-box h2, .settings-box h2 {
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-meta);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .theme-option {
+            background: var(--bg-card);
+            border: 3px solid transparent;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .theme-option:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .theme-option.active {
+            border-color: var(--accent-primary);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .theme-preview {
+            display: flex;
+            gap: 5px;
+        }
+
+        .theme-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .user-bar {
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .user-info {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .settings-btn, .logout-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .settings-btn {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .logout-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .nav-tabs {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active {
+            background: var(--button-primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .form-section h2 {
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background: var(--button-primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Compact mode - smaller cards, more per row */
+        [data-compact="true"] .gallery {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        [data-compact="true"] .game-card {
+            padding: 15px;
+        }
+
+        [data-compact="true"] .game-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        [data-compact="true"] .game-card p {
+            font-size: 13px;
+        }
+
+        /* Hide descriptions when toggled off */
+        [data-show-descriptions="false"] .game-card > p:first-of-type {
+            display: none;
+        }
+
+        /* Phase 4: Hide thumbnails when toggle is off */
+        [data-show-thumbnails="false"] .post-thumbnail {
+            display: none;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; /* Phase 5: For pinned badge positioning */
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .game-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .game-card p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .game-meta {
+            color: var(--text-meta);
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .card-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .open-btn {
+            background: var(--button-primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            grid-column: 1 / -1;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .star-btn {
+            background: #ffc107;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .star-btn.starred {
+            background: #ff9800;
+        }
+
+        .no-games {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--text-meta);
+            box-shadow: 0 5px 15px var(--shadow);
+            grid-column: 1 / -1;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .message.error {
+            background: #f44336;
+            color: white;
+        }
+
+        .info-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid var(--accent-primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .close-modal-btn {
+            background: #999;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-    <!-- Login Screen -->
-    <div id="loginScreen">
-        <div class="login-container">
-            <div class="login-header">
-                <h1>🌐 Sites</h1>
-                <p>Social Content Sharing Platform</p>
+    <div id="authModal" class="auth-modal hidden">
+        <div class="auth-box">
+            <h2>🌐 Sites</h2>
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
             </div>
-            
-            <div class="login-form">
-                <input type="text" id="loginUsername" placeholder="Username" autocomplete="username">
-                <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
-                <button id="loginBtn" class="primary-button">Login</button>
-                <button id="registerBtn" class="secondary-button">Create Account</button>
-            </div>
-            
-            <div class="login-footer">
-                <p>Sites v4.0 - Social Platform</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main App -->
-    <div id="app" style="display: none;">
-        <!-- User Bar -->
-        <div id="userBar" class="user-bar">
-            <div class="user-info">
-                <span class="logo">🌐 Sites</span>
-                <span id="userDisplay"></span>
-            </div>
-            <div class="user-actions">
-                <button id="notificationBtn" class="icon-button">
-                    <span>🔔</span>
-                    <span id="notificationBadge" class="badge"></span>
-                </button>
-                <button id="profileBtn" class="icon-button">👤 My Profile</button>
-                <button id="settingsBtn" class="icon-button">⚙️ Settings</button>
-                <button id="logoutBtn" class="icon-button">🚪 Logout</button>
-            </div>
-        </div>
-
-        <!-- Admin Report Review Banner -->
-        <div id="reportReviewBanner" class="report-banner"></div>
-
-        <!-- Navigation Tabs -->
-        <div id="navTabs" class="nav-tabs"></div>
-
-        <!-- Content Tabs -->
-        <div class="content-container">
-            <!-- Browse Tab -->
-            <div id="browseTab" class="tab-content active">
-                <div class="browse-controls">
-                    <input type="text" id="searchInput" placeholder="🔍 Search posts...">
-                    <button id="clearSearchBtn" class="secondary-button">✕ Clear</button>
-                    <select id="sortSelect"></select>
-                    <button id="refreshBtn" class="icon-button">🔄 Refresh</button>
-                    <button id="filtersBtn" class="icon-button">🔍 Filters</button>
+            <div id="authMessage" class="message"></div>
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required>
                 </div>
-                <div id="browseGallery" class="gallery"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+            <h2>⚙️ Settings</h2>
+            
+            <!-- Custom Color Settings -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">🎨 Custom Colors</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Choose your own colors for the interface:</p>
+                
+                <div style="display: grid; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="color" id="primaryColor" value="#667eea" oninput="previewColors()" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 3px;">Primary Color</div>
+                            <div style="font-size: 12px; color: var(--text-meta);">Buttons, links, accents</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="color" id="secondaryColor" value="#764ba2" oninput="previewColors()" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 3px;">Secondary Color</div>
+                            <div style="font-size: 12px; color: var(--text-meta);">Gradients, highlights</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="color" id="backgroundColor" value="#f5f7fa" oninput="previewColors()" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 3px;">Background Color</div>
+                            <div style="font-size: 12px; color: var(--text-meta);">Page background</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="color" id="cardColor" value="#ffffff" oninput="previewColors()" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 3px;">Card Color</div>
+                            <div style="font-size: 12px; color: var(--text-meta);">Post card backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="color" id="textColor" value="#2d3748" oninput="previewColors()" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 3px;">Text Color</div>
+                            <div style="font-size: 12px; color: var(--text-meta);">Main text color</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: var(--text-primary); font-size: 14px;">
+                        <strong>💡 Tip:</strong> Pick your colors to preview them, then click <strong>"💾 Save Colors"</strong> to save permanently!
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button onclick="saveCustomColors()" style="flex: 1; background: #4caf50; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">💾 Save Colors</button>
+                    <button onclick="resetToDefaultColors()" style="flex: 1; background: #999; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">🔄 Reset</button>
+                </div>
+                
+                <div style="background: rgba(102, 126, 234, 0.1); padding: 12px; border-radius: 8px; margin-top: 15px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary);">
+                        <input type="checkbox" id="invertColors" onchange="toggleInvert()" style="width: 20px; height: 20px; cursor: pointer;">
+                        <span><strong>🔄 Invert All Colors</strong></span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Display Settings -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">👁️ Display</h3>
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px; margin-bottom: 10px;">
+                    <input type="checkbox" id="compactMode" onchange="toggleCompactMode()" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span><strong>📦 Compact Card View</strong> - Smaller cards, more per row</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                    <input type="checkbox" id="showDescriptions" checked onchange="toggleDescriptions()" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span><strong>📝 Show Descriptions</strong> - Display post descriptions</span>
+                </label>
+                
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px; margin-bottom: 10px;">
+                    <input type="checkbox" id="showThumbnails" checked onchange="toggleThumbnails()" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span><strong>🖼️ Show Thumbnails</strong> - Display post thumbnail images</span>
+                </label>
+            </div>
+            
+            <!-- Theme Presets (Phase 4) -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">🎨 Theme</h3>
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">Choose a theme preset:</label>
+                <select id="themePreset" onchange="applyThemePreset()" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; cursor: pointer; background: white;">
+                    <option value="default">🎨 Default (Purple & Blue)</option>
+                    <option value="ocean">🌊 Ocean (Blue & Teal)</option>
+                    <option value="forest">🌲 Forest (Green & Earth)</option>
+                    <option value="sunset">🌅 Sunset (Orange & Pink)</option>
+                    <option value="midnight">🌙 Midnight (Dark Blue & Purple)</option>
+                </select>
             </div>
 
-            <!-- My Posts Tab -->
-            <div id="mygamesTab" class="tab-content">
-                <div id="mygamesGallery" class="gallery"></div>
+            <!-- Notification Preferences -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">🔔 Notification Preferences</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Choose what notifications you want to receive</p>
+                
+                <div style="display: grid; gap: 10px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="checkbox" id="notifComments" onchange="saveNotificationPrefs()" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        <span><strong>💬 Comments</strong> - When someone comments on your post</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <input type="checkbox" id="notifRatings" onchange="saveNotificationPrefs()" checked style="width: 20px; height: 20px; cursor: pointer;">
+                        <span><strong>⭐ Ratings</strong> - When someone rates your post</span>
+                    </label>
+                    
+                    <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 12px; border-radius: 8px;">
+                        <p style="margin: 0; color: var(--text-primary); font-size: 14px;">
+                            <strong>⚠️ Admin Notifications:</strong> Always enabled (deletions, warnings)
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Starred Tab -->
-            <div id="starredTab" class="tab-content">
-                <div id="starredGallery" class="gallery"></div>
+            <!-- Panic Button Settings -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">🚨 Panic Button</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Quick escape: Press a key to instantly redirect to another website</p>
+                
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px; margin-bottom: 15px;">
+                    <input type="checkbox" id="panicEnabled" onchange="togglePanicButton()" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span><strong>Enable Panic Button</strong></span>
+                </label>
+                
+                <div id="panicSettings" style="display: none;">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 5px;">Panic Key</label>
+                        <select id="panicKey" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                            <option value="Escape">Escape (ESC)</option>
+                            <option value="F1">F1</option>
+                            <option value="F2">F2</option>
+                            <option value="F3">F3</option>
+                            <option value="F4">F4</option>
+                            <option value="F5">F5</option>
+                            <option value="F6">F6</option>
+                            <option value="F7">F7</option>
+                            <option value="F8">F8</option>
+                            <option value="F9">F9</option>
+                            <option value="F10">F10</option>
+                            <option value="F11">F11</option>
+                            <option value="F12">F12</option>
+                            <option value="Backquote">`(Backtick)</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 5px;">Redirect URL</label>
+                        <input type="url" id="panicUrl" placeholder="https://google.com" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 5px;">Redirect Mode</label>
+                        <select id="panicMode" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                            <option value="replace">Replace Current Tab (no history)</option>
+                            <option value="newTab">Open New Tab & Close This One</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="savePanicSettings()" style="width: 100%; background: #f44336; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        💾 Save Panic Button
+                    </button>
+                </div>
             </div>
-
-            <!-- Bookmarks Tab -->
-            <div id="bookmarksTab" class="tab-content">
-                <div id="bookmarksGallery" class="gallery"></div>
+            
+            <!-- Comment Settings -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">💬 Comment Settings</h3>
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">Comment Sort Order:</label>
+                <select id="commentSortOrder" onchange="saveCommentSettings()" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                    <option value="newest">Newest First (top)</option>
+                    <option value="oldest">Oldest First (bottom)</option>
+                </select>
             </div>
-
-            <!-- Collections Tab -->
-            <div id="collectionsTab" class="tab-content">
-                <div id="collectionsGallery" class="gallery"></div>
+            
+            <!-- Data Management -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">💾 Data Management</h3>
+                <button onclick="exportData()" style="width: 100%; background: #4caf50; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+                    📥 Export All Data (JSON)
+                </button>
+                <button onclick="showStats()" style="width: 100%; background: #2196f3; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+                    📊 View Statistics
+                </button>
+                <button onclick="recheckNotifications()" style="width: 100%; background: #ff5722; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+                    🔔 Check for Missed Notifications
+                </button>
+                <button onclick="clearStarred()" style="width: 100%; background: #ff9800; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    ⭐ Clear All Starred Posts
+                </button>
             </div>
-
-            <!-- Leaderboards Tab -->
-            <div id="leaderboardsTab" class="tab-content">
-                <div id="leaderboardsContent" class="gallery"></div>
+            
+            <!-- Admin Tools (Only visible to admin) -->
+            <div id="adminTools" style="margin-bottom: 30px; display: none;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">⚡ Admin Tools</h3>
+                <button onclick="openVerifyUsersPanel()" style="width: 100%; background: linear-gradient(135deg, #1da1f2, #0d8ecf); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+                    ✅ Manage Verified Users
+                </button>
+                
+                <!-- Reports Panel (admin only) -->
+                <div style="margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h4 style="color: var(--text-primary); margin: 0;">🚨 Reports <span id="reportsBadge" style="background: #f44336; color: white; border-radius: 10px; padding: 2px 8px; font-size: 12px; margin-left: 6px;"></span></h4>
+                    </div>
+                    <div id="adminReportsList" style="max-height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;"></div>
+                    <div id="noReportsMsg" style="color: var(--text-meta); font-size: 14px; padding: 15px; text-align: center; background: rgba(102,126,234,0.05); border-radius: 8px; display: none;">✅ No pending reports</div>
+                </div>
             </div>
-
-            <!-- Add Post Tab -->
-            <div id="addTab" class="tab-content">
-                <div id="addPostForm" class="add-form"></div>
+            
+            <!-- Account Settings -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">👤 Account</h3>
+                <div style="background: rgba(102, 126, 234, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p style="color: var(--text-secondary); margin: 0 0 8px 0; font-size: 14px;">
+                        <strong>Username:</strong> <span id="settingsUsername"></span>
+                    </p>
+                    <p style="color: var(--text-secondary); margin: 0 0 8px 0; font-size: 14px;">
+                        <strong>Account Type:</strong> <span id="settingsAccountType"></span>
+                    </p>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 14px;">
+                        <strong>Account Created:</strong> <span id="settingsAccountDate"></span>
+                    </p>
+                </div>
+                <button onclick="changePassword()" style="width: 100%; background: var(--accent-primary); color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 10px;">
+                    🔒 Change Password
+                </button>
+                <button onclick="deleteAccount()" style="width: 100%; background: #f44336; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    🗑️ Delete Account
+                </button>
+            </div>
+            
+            <button class="close-modal-btn" onclick="closeSettingsModal()" style="width: 100%; margin-bottom: 15px;">Close</button>
+            
+            <!-- Version Info -->
+            <div style="text-align: center; color: var(--text-meta); font-size: 12px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.1);">
+                Sites v3.0
             </div>
         </div>
     </div>
 
-    <!-- Modals Container -->
-    <div id="modalsContainer"></div>
+    <div id="gameModal" class="game-modal hidden">
+        <div class="game-modal-content">
+            <div class="game-modal-header">
+                <h3 id="modalTitle" class="modal-title">Site</h3>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <!-- Quick Actions in Modal -->
+                    <div id="modalQuickActions" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+                    
+                    <div class="modal-buttons">
+                        <button class="modal-action-btn" onclick="handleFullscreen()">⛶ Fullscreen</button>
+                        <button class="modal-action-btn" onclick="handleVisitSite()">🌐 Visit Site</button>
+                        <button class="close-modal-btn" onclick="closeGameModalFn()">✕ Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-modal-body">
+                <iframe id="gameFrame" class="game-frame"></iframe>
+                <!-- Permanent helpful message overlay (closeable) -->
+                <div id="iframeHelpOverlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.85)); color: white; padding: 20px; text-align: center; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 10; display: block;">
+                    <button onclick="closeIframeHelp()" style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; padding: 0;">✕</button>
+                    <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">
+                        ⚠️ Website Not Loading?
+                    </div>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        Some websites can't be displayed in frames for security reasons.<br>
+                        If you see a blank screen, click <strong style="color: #4fc3f7;">"🌐 Visit Site"</strong> above to open it in a new tab!
+                    </div>
+                    <div style="margin-top: 12px; font-size: 13px; opacity: 0.8;">
+                        💡 Tip: The "Visit Site" button always works, even if the preview doesn't load
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Debug Panel -->
-    <button id="debugToggle" class="debug-toggle">🐛 Debug</button>
-    <div id="debugPanel" class="debug-panel"></div>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1 style="margin: 0;">🌐 Sites</h1>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <!-- Random Post Button -->
+                <button onclick="showRandomPost()" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 12px rgba(238, 90, 111, 0.3); transition: all 0.3s;">
+                    🎲 Random
+                </button>
+                
+                <!-- Notification Bell -->
+                <div style="position: relative;">
+                    <button id="notificationBell" onclick="toggleNotifications()" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; padding: 10px 15px; border: none; border-radius: 50%; cursor: pointer; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); position: relative; transition: all 0.3s;">
+                        🔔
+                    </button>
+                    <span id="notificationBadge" style="display: none; position: absolute; top: -5px; right: -5px; background: #f44336; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; font-weight: bold; text-align: center; line-height: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
+                    
+                    <!-- Notification Dropdown -->
+                    <div id="notificationDropdown" style="display: none; position: absolute; top: 60px; right: 0; width: 400px; max-height: 500px; background: var(--bg-card); border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden;">
+                        <div style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0; font-size: 18px;">🔔 Notifications</h3>
+                            <button onclick="markAllAsRead()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">Mark all read</button>
+                        </div>
+                        <div id="notificationList" style="max-height: 400px; overflow-y: auto; padding: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Debug toggle button -->
+        <button id="debugToggle" onclick="toggleDebug()" style="position: fixed; bottom: 20px; right: 20px; z-index: 2000; background: #ffc107; color: #000; padding: 10px 20px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+            🔧 Debug
+        </button>
+        
+        <!-- Debug modal -->
+        <div id="debugModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1999; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; max-height: 80vh; overflow-y: auto; width: 90%;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #333;">🔧 Debug Log</h3>
+                    <button onclick="toggleDebug()" style="background: #999; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer;">Close</button>
+                </div>
+                <div id="debugLog" style="background: #f5f5f5; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 12px; max-height: 60vh; overflow-y: auto;"></div>
+                <button onclick="clearDebug()" style="margin-top: 10px; background: #f44336; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Clear Log</button>
+            </div>
+        </div>
 
-    <!-- Panic Button -->
-    <button id="panicButton" class="panic-button">🚨</button>
+        <!-- Admin delete reason modal -->
+        <div id="reasonModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2001; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%;">
+                <h3 style="margin: 0 0 15px 0; color: #333;">🔒 Admin Delete</h3>
+                <p style="margin: 0 0 15px 0; color: #666;">Deleting: <strong id="reasonGameTitle"></strong></p>
+                <p style="margin: 0 0 10px 0; color: #666;">Enter reason for deletion:</p>
+                <textarea id="deleteReason" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; min-height: 80px; resize: vertical;" placeholder="Enter reason..."></textarea>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button onclick="confirmAdminDelete()" style="flex: 1; background: #f44336; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Delete</button>
+                    <button onclick="cancelAdminDelete()" style="flex: 1; background: #999; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Website selector modal -->
+        <div id="websiteSelectorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2001; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                <h3 style="margin: 0 0 15px 0; color: #333;" id="selectorTitle">Choose Website</h3>
+                <div id="websitesList" style="display: grid; gap: 10px;"></div>
+                <button onclick="closeWebsiteSelector()" style="width: 100%; margin-top: 15px; background: #999; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Statistics Modal -->
+        <div id="statsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2001; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%;">
+                <h3 style="margin: 0 0 20px 0; color: #333; text-align: center;">📊 Sites Statistics</h3>
+                <div id="statsContent" style="display: grid; gap: 12px; margin-bottom: 20px;"></div>
+                <button onclick="closeStatsModal()" style="width: 100%; background: var(--accent-primary); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">Close</button>
+            </div>
+        </div>
+
+        <!-- Deletion Notification Modal -->
+        <div id="deletionNotificationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2002; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 64px; margin-bottom: 10px;">⚠️</div>
+                    <h2 style="margin: 0; color: #f44336; font-size: 24px;">Admin Deleted Your Post(s)</h2>
+                </div>
+                <div id="deletionNotificationContent" style="display: grid; gap: 15px; margin-bottom: 25px;"></div>
+                <button onclick="closeDeletionNotification()" style="width: 100%; background: var(--accent-primary); color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">I Understand</button>
+            </div>
+        </div>
+
+        <!-- Comments Modal -->
+        <div id="commentsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2001; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 700px; width: 90%; max-height: 85vh; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: #333;" id="commentsTitle">💬 Comments</h3>
+                    <button onclick="closeComments()" style="background: #999; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">✕</button>
+                </div>
+                
+                <div id="commentsList" style="flex: 1; overflow-y: auto; margin-bottom: 20px; max-height: 400px;"></div>
+                
+                <div style="border-top: 2px solid #e0e0e0; padding-top: 15px;">
+                    <textarea id="commentInput" placeholder="Write a comment..." style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 80px;"></textarea>
+                    <button onclick="postComment()" style="width: 100%; margin-top: 10px; background: var(--accent-primary); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">Post Comment</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="user-bar" id="userBar" style="display:none;">
+            <div class="user-info">Logged in as: <span id="currentUsername" onclick="openMyProfile()" style="cursor: pointer; color: var(--accent-primary); font-weight: 600; text-decoration: underline;" title="Click to view your profile"></span></div>
+            <div class="user-actions">
+                <button class="settings-btn" onclick="openMyProfile()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; margin-right: 10px;">
+                    👤 My Profile
+                </button>
+                <button class="settings-btn" onclick="openSettingsModal()">⚙️ Settings</button>
+                <button class="logout-btn" onclick="doLogout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Admin Report Review Banner (shown when reviewing a reported post) -->
+        <div id="reportReviewBanner" style="display:none; position: sticky; top: 0; z-index: 999; background: linear-gradient(135deg, #b71c1c, #f44336); color: white; padding: 14px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+                <div style="flex: 1; min-width: 200px;">
+                    <strong>🚨 Admin Review Mode</strong>
+                    <span id="bannerReportInfo" style="margin-left: 10px; font-size: 14px; opacity: 0.9;"></span>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="reviewReportSafe()" style="background: #4caf50; color: white; border: none; padding: 9px 20px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 14px;">✅ Mark Safe</button>
+                    <button onclick="reviewReportDelete()" style="background: #222; color: white; border: none; padding: 9px 20px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 14px;">🗑️ Delete Post</button>
+                    <button onclick="dismissReviewBanner()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.5); padding: 9px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 14px;">✕ Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-tabs" id="navTabs" style="display:none;">
+            <button class="nav-tab active" onclick="switchTab('browse')">🌐 Browse All</button>
+            <button class="nav-tab" onclick="switchTab('mygames')">📁 My Posts</button>
+            <button class="nav-tab" onclick="switchTab('starred')">⭐ Starred</button>
+            <button class="nav-tab" onclick="switchTab('bookmarks')">🔖 Bookmarks</button>
+            <button class="nav-tab" onclick="switchTab('collections')">📂 Collections</button>
+            <button class="nav-tab" onclick="switchTab('leaderboards')">🏆 Leaderboards</button>
+            <button class="nav-tab" onclick="switchTab('add')">➕ Add Post</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div id="searchBar" style="display: none; margin: 20px 0; padding: 0 20px;">
+            <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: stretch;">
+                <div style="flex: 3; display: flex; gap: 10px; background: white; padding: 12px; border-radius: 40px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 4px solid var(--accent-primary);">
+                    <input type="text" id="searchInput" placeholder="Click to search..." style="flex: 1; padding: 18px 25px; border: none; background: #f9f9f9; border-radius: 30px; font-size: 20px; outline: none; color: #000; font-weight: 600;" onfocus="this.placeholder=''; this.style.background='white';" onblur="if(!this.value) this.placeholder='Click to search...'; this.style.background='#f9f9f9';" oninput="performSearch()">
+                    <button onclick="clearSearch()" style="padding: 18px 30px; background: var(--accent-primary); color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px; font-weight: 700; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">✕ Clear</button>
+                </div>
+                <select id="sortSelect" onchange="applySortAndFilter()" style="flex: 1; padding: 10px 15px; border: 4px solid var(--accent-primary); border-radius: 30px; font-size: 14px; cursor: pointer; background: white; color: #000; font-weight: 600; box-shadow: 0 6px 20px rgba(0,0,0,0.2);">
+                    <option value="newest">📅 Newest</option>
+                    <option value="oldest">🕰️ Oldest</option>
+                    <option value="trending">🔥 Trending</option>
+                    <option value="starred">⭐ Popular</option>
+                    <option value="alphabetical">🔤 A-Z</option>
+                </select>
+                <button onclick="refreshPosts()" style="padding: 10px 20px; border: 4px solid var(--accent-primary); border-radius: 30px; cursor: pointer; background: #4caf50; color: white; font-weight: 700; font-size: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); white-space: nowrap;">🔄 Refresh</button>
+                <button onclick="openFiltersModal()" style="padding: 10px 20px; border: 4px solid var(--accent-primary); border-radius: 30px; cursor: pointer; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; font-weight: 700; font-size: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); white-space: nowrap;">🔍 Filters</button>
+            </div>
+            <div id="searchResults" style="font-size: 16px; color: var(--accent-primary); font-weight: 700; padding: 0 15px;"></div>
+        </div>
+
+        <div id="browseTab" class="tab-content" style="display:none;">
+            <div id="browseGallery" class="gallery"></div>
+        </div>
+
+        <div id="mygamesTab" class="tab-content">
+            <div id="myGamesGallery" class="gallery"></div>
+        </div>
+
+        <div id="starredTab" class="tab-content">
+            <div id="starredGallery" class="gallery"></div>
+        </div>
+
+        <div id="collectionsTab" class="tab-content">
+            <div id="collectionsGallery" class="gallery"></div>
+        </div>
+
+        <!-- Phase 5: Leaderboards Tab -->
+        <div id="leaderboardsTab" class="tab-content">
+            <div id="leaderboardsContent" class="gallery"></div>
+        </div>
+
+        <!-- Phase 5: Bookmarks Tab -->
+        <div id="bookmarksTab" class="tab-content">
+            <div id="bookmarksGallery" class="gallery"></div>
+        </div>
+
+        <div id="addTab" class="tab-content">
+            <div class="form-section">
+                <h2 id="addFormTitle">Add a New Post</h2>
+                <div class="info-box">
+                    <p><strong>📌 You can add multiple websites to one post!</strong></p>
+                    <p>• Add URLs one by one</p>
+                    <p>• Each URL can be a different game, tool, or website</p>
+                </div>
+                <div id="addMessage" class="message"></div>
+                <form id="addGameForm">
+                    <input type="hidden" id="editingGameId" value="">
+                    <div class="form-group">
+                        <label>Post Title *</label>
+                        <input type="text" id="gameTitle" required placeholder="e.g., My Favorite Games">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="gameDescription" placeholder="Brief description of this collection"></textarea>
+                    </div>
+                    
+                    <!-- URL Management Section -->
+                    <div style="background: rgba(102, 126, 234, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <h3 style="color: var(--accent-primary); margin-bottom: 15px;">🔗 Websites in this Post</h3>
+                        <div id="urlsList" style="margin-bottom: 15px;">
+                            <div style="color: var(--text-meta); font-style: italic; padding: 20px; text-align: center;">No websites added yet</div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" id="newUrlInput" placeholder="example.com or https://example.com" style="flex: 1; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                            <button type="button" onclick="addUrlToPost()" style="background: #4caf50; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap;">➕ Add URL</button>
+                        </div>
+                        <input type="text" id="newUrlLabel" placeholder="Label (optional, e.g., 'Main Game', 'Bonus Level')" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 5px;">
+                        <p style="font-size: 12px; color: var(--text-meta); margin: 0;">💡 Add a label to help identify each URL</p>
+                    </div>
+                    
+                    <!-- Button Text Customization (for 3+ URLs) -->
+                    <div id="buttonTextSection" style="display: none; background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 2px solid var(--accent-primary);">
+                        <h4 style="color: var(--accent-primary); margin: 0 0 10px 0;">🔘 Custom Button Text (3+ websites)</h4>
+                        <input type="text" id="postButtonText" placeholder="View _ websites" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 5px;">
+                        <p style="font-size: 12px; color: var(--text-meta); margin: 0;">💡 Use <strong>_</strong> for the number (e.g., "View _ websites", "Open _ links")</p>
+                    </div>
+                    
+                    <!-- Tags Input (Preset) -->
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">🏷️ Tags (optional, max 3)</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                            <button type="button" onclick="togglePresetTag('Games')" class="preset-tag-btn" data-tag="Games" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🎮 Games</button>
+                            <button type="button" onclick="togglePresetTag('Tools')" class="preset-tag-btn" data-tag="Tools" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🔧 Tools</button>
+                            <button type="button" onclick="togglePresetTag('Fun')" class="preset-tag-btn" data-tag="Fun" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🎉 Fun</button>
+                            <button type="button" onclick="togglePresetTag('Educational')" class="preset-tag-btn" data-tag="Educational" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">📚 Educational</button>
+                            <button type="button" onclick="togglePresetTag('Creative')" class="preset-tag-btn" data-tag="Creative" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🎨 Creative</button>
+                            <button type="button" onclick="togglePresetTag('Social')" class="preset-tag-btn" data-tag="Social" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">👥 Social</button>
+                            <button type="button" onclick="togglePresetTag('Music')" class="preset-tag-btn" data-tag="Music" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🎵 Music</button>
+                            <button type="button" onclick="togglePresetTag('Videos')" class="preset-tag-btn" data-tag="Videos" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🎬 Videos</button>
+                            <button type="button" onclick="togglePresetTag('News')" class="preset-tag-btn" data-tag="News" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">📰 News</button>
+                            <button type="button" onclick="togglePresetTag('Sports')" class="preset-tag-btn" data-tag="Sports" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">⚽ Sports</button>
+                            <button type="button" onclick="togglePresetTag('Art')" class="preset-tag-btn" data-tag="Art" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🖼️ Art</button>
+                            <button type="button" onclick="togglePresetTag('Coding')" class="preset-tag-btn" data-tag="Coding" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">💻 Coding</button>
+                            <button type="button" onclick="togglePresetTag('Other')" class="preset-tag-btn" data-tag="Other" style="padding: 7px 14px; border-radius: 20px; border: 2px solid #ccc; background: #f5f5f5; color: #333; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">🔹 Other</button>
+                        </div>
+                        <p id="tagCountMsg" style="font-size: 12px; color: var(--text-meta);">💡 Select up to 3 tags</p>
+                    </div>
+                    
+                    <!-- Thumbnail Image URL (Phase 3) -->
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">🖼️ Thumbnail Image (optional)</label>
+                        <input type="url" id="thumbnailUrl" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 5px;">
+                        <div id="thumbnailPreview" style="display: none; margin-top: 10px;">
+                            <img id="thumbnailPreviewImg" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 2px solid var(--accent-primary);">
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-meta); margin-top: 5px;">💡 Add an image URL to show a visual preview on your post</p>
+                    </div>
+                    
+                    <!-- Comment Settings -->
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); padding: 12px; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                            <input type="checkbox" id="allowComments" checked style="width: 20px; height: 20px; cursor: pointer;">
+                            <span><strong>💬 Allow Comments</strong> - Let users comment on this post</span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" id="submitBtn" style="flex: 1;">Save Post</button>
+                        <button type="button" id="cancelEditBtn" onclick="cancelEdit()" style="flex: 1; background: #999; display: none;">Cancel Edit</button>
+                    </div>
+                </form>
+                
+                <!-- Edit Existing Post Button -->
+                <div style="margin-top: 30px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+                    <h3 style="color: var(--accent-primary); margin-bottom: 15px;">📝 Edit Existing Post</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">Click a post below to edit it or add more URLs:</p>
+                    <div id="editablePostsList" style="display: grid; gap: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verified Users Modal (Admin Only) -->
+    <div id="verifyUsersModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+            <h2>✅ Manage Verified Users</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">Verify trusted users with a blue checkmark badge</p>
+            
+            <div id="usersList" style="margin-bottom: 20px;"></div>
+            
+            <button onclick="closeVerifyUsersPanel()" style="width: 100%; background: #999; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 400px;">
+            <h2>⭐ Rate This Post</h2>
+            <p id="ratingPostTitle" style="color: var(--text-secondary); margin-bottom: 20px;"></p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div class="star-rating" style="font-size: 40px; justify-content: center;">
+                    <span class="star" data-rating="1" onclick="selectRating(1)">☆</span>
+                    <span class="star" data-rating="2" onclick="selectRating(2)">☆</span>
+                    <span class="star" data-rating="3" onclick="selectRating(3)">☆</span>
+                    <span class="star" data-rating="4" onclick="selectRating(4)">☆</span>
+                    <span class="star" data-rating="5" onclick="selectRating(5)">☆</span>
+                </div>
+                <p id="ratingText" style="color: var(--text-meta); margin-top: 15px;">Click to rate</p>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="submitRating()" id="submitRatingBtn" style="flex: 1; background: linear-gradient(135deg, #4caf50, #45a049); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;" disabled>
+                    Submit Rating
+                </button>
+                <button onclick="closeRatingModal()" style="flex: 1; background: #999; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal (Phase 2) -->
+    <div id="userProfileModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                <div>
+                    <h2 id="profileUsername" style="display: inline;">User Profile</h2>
+                    <span id="profileVerifiedBadge"></span>
+                    <button id="followBtn" onclick="toggleFollow()" style="margin-left: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 20px; border: none; border-radius: 20px; cursor: pointer; font-weight: 600;">
+                        Follow
+                    </button>
+                </div>
+                <button onclick="closeUserProfile()" style="background: #999; color: white; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer;">✕</button>
+            </div>
+            
+            <!-- Profile Stats -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
+                <div style="text-align: center; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                    <div style="font-size: 28px; font-weight: bold; color: var(--accent-primary);" id="profilePostCount">0</div>
+                    <div style="font-size: 14px; color: var(--text-meta);">Posts</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                    <div style="font-size: 28px; font-weight: bold; color: var(--accent-primary);" id="profileFollowers">0</div>
+                    <div style="font-size: 14px; color: var(--text-meta);">Followers</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                    <div style="font-size: 28px; font-weight: bold; color: var(--accent-primary);" id="profileTotalRating">0</div>
+                    <div style="font-size: 14px; color: var(--text-meta);">Total Ratings</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; cursor: pointer;" onclick="openCollectionsFromProfile()" title="Click to view collections">
+                    <div style="font-size: 28px; font-weight: bold; color: var(--accent-primary);" id="profileCollections">0</div>
+                    <div style="font-size: 14px; color: var(--text-meta);">Collections</div>
+                </div>
+            </div>
+            
+            <!-- Bio Section -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 10px;">📝 Bio</h3>
+                <div id="profileBioDisplay" style="padding: 15px; background: var(--bg-card); border-radius: 10px; color: var(--text-secondary); min-height: 60px;"></div>
+                <div id="profileBioEdit" style="display: none;">
+                    <textarea id="bioInput" style="width: 100%; min-height: 100px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; resize: vertical;" placeholder="Tell us about yourself..."></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button onclick="saveBio()" style="flex: 1; background: #4caf50; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Save Bio</button>
+                        <button onclick="cancelBioEdit()" style="flex: 1; background: #999; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Cancel</button>
+                    </div>
+                </div>
+                <button id="editBioBtn" onclick="editBio()" style="display: none; margin-top: 10px; background: var(--accent-primary); color: white; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    ✏️ Edit Bio
+                </button>
+            </div>
+            
+            <!-- Badges Section -->
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: var(--text-primary); margin-bottom: 10px;">🏆 Badges</h3>
+                <div id="profileBadges" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+            </div>
+            
+            <!-- Following Section -->
+            <div id="followingSection" style="margin-bottom: 25px; display: none;">
+                <h3 style="color: var(--text-primary); margin-bottom: 10px;">👥 Following</h3>
+                <div id="profileFollowing" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+            </div>
+            
+            <!-- User's Posts -->
+            <div>
+                <h3 style="color: var(--text-primary); margin-bottom: 15px;">📌 Posts by this user</h3>
+                <div id="profilePosts" style="display: grid; gap: 15px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collections Modal (Phase 3) -->
+    <div id="collectionsModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>🔖 My Collections</h2>
+                <button onclick="closeCollectionsModal()" style="background: #999; color: white; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer;">✕</button>
+            </div>
+            
+            <!-- Create New Collection -->
+            <div style="margin-bottom: 25px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                <h3 style="margin: 0 0 10px 0; color: var(--text-primary);">Create New Collection</h3>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="newCollectionName" placeholder="Collection name (e.g., My Favorites)" style="flex: 1; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <button onclick="createCollection()" style="background: #4caf50; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        + Create
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Collections List -->
+            <div id="collectionsList"></div>
+        </div>
+    </div>
+
+    <!-- Add to Collection Modal -->
+    <div id="addToCollectionModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 400px;">
+            <h2>🔖 Add to Collection</h2>
+            <p id="addToCollectionPostTitle" style="color: var(--text-secondary); margin-bottom: 20px;"></p>
+            
+            <div id="collectionCheckboxes" style="margin-bottom: 20px;"></div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="saveToCollections()" style="flex: 1; background: #4caf50; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Save
+                </button>
+                <button onclick="closeAddToCollectionModal()" style="flex: 1; background: #999; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Modal (Phase 4) -->
+    <div id="analyticsModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 800px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>📊 Post Analytics</h2>
+                <button onclick="closeAnalyticsModal()" style="background: #999; color: white; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer;">✕</button>
+            </div>
+            
+            <div id="analyticsContent"></div>
+        </div>
+    </div>
+
+    <!-- Report Modal (Phase 4) -->
+    <div id="reportModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 500px;">
+            <h2>🚨 Report Content</h2>
+            <p id="reportTargetTitle" style="color: var(--text-secondary); margin-bottom: 20px;"></p>
+            
+            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">Reason for reporting:</label>
+            <select id="reportReason" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px;">
+                <option value="spam">🚫 Spam</option>
+                <option value="inappropriate">⚠️ Inappropriate Content</option>
+                <option value="misleading">❌ Misleading Information</option>
+                <option value="harassment">😠 Harassment</option>
+                <option value="other">🔹 Other</option>
+            </select>
+            
+            <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">Additional details (optional):</label>
+            <textarea id="reportDetails" style="width: 100%; min-height: 80px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; resize: vertical; margin-bottom: 20px;" placeholder="Provide more information..."></textarea>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="submitReport()" style="flex: 1; background: #f44336; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Submit Report
+                </button>
+                <button onclick="closeReportModal()" style="flex: 1; background: #999; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Filters Modal (Phase 4) -->
+    <div id="filtersModal" class="settings-modal hidden">
+        <div class="settings-box" style="max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>🔍 Advanced Filters</h2>
+                <button onclick="closeFiltersModal()" style="background: #999; color: white; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer;">✕</button>
+            </div>
+            
+            <!-- Filter by Tag -->
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">🏷️ Filter by Tag:</label>
+                <select id="filterByTag" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="">All Tags</option>
+                </select>
+            </div>
+            
+            <!-- Filter by Rating -->
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">⭐ Minimum Rating:</label>
+                <select id="filterByRating" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="0">Any Rating</option>
+                    <option value="1">1+ Stars</option>
+                    <option value="2">2+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="5">5 Stars Only</option>
+                </select>
+            </div>
+            
+            <!-- Filter by Date -->
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">📅 Date Range:</label>
+                <select id="filterByDate" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="all">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+            
+            <!-- Filter by Creator -->
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 8px;">👤 Filter by Creator:</label>
+                <select id="filterByCreator" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="">All Creators</option>
+                </select>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="applyAdvancedFilters()" style="flex: 1; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Apply Filters
+                </button>
+                <button onclick="clearFilters()" style="flex: 1; background: #999; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Clear All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
