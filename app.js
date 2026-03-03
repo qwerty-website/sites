@@ -1073,14 +1073,14 @@
             const isBookmarked = appData.bookmarks && appData.bookmarks[currentUser] && appData.bookmarks[currentUser].includes(gameId);
             
             actionsContainer.innerHTML = `
-                <button onclick="toggleBookmark(${gameId}); this.textContent = appData.bookmarks[currentUser].includes(${gameId}) ? '✓' : '🔖';" style="background: ${isBookmarked ? '#4caf50' : '#1976d2'}; color: white; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
-                    ${isBookmarked ? '✓' : '🔖'}
+                <button onclick="toggleBookmark(${gameId}); window.location.reload();" style="background: ${isBookmarked ? '#4caf50' : '#1976d2'}; color: white; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+                    ${isBookmarked ? '✓ Saved' : '🔖 Save'}
                 </button>
                 <button onclick="openRatingModal(${gameId})" style="background: linear-gradient(135deg, #ffd700, #ffed4e); color: #333; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
-                    ⭐
+                    ⭐ Rate
                 </button>
                 <button onclick="openComments(${gameId})" style="background: #2196f3; color: white; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
-                    💬
+                    💬 Comment
                 </button>
             `;
             
