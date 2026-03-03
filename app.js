@@ -1080,7 +1080,7 @@
                     ⭐ Rate
                 </button>
                 <button onclick="openComments(${gameId})" style="background: #2196f3; color: white; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
-                    💬 Comment
+                    💬 Comments
                 </button>
             `;
             
@@ -1825,10 +1825,10 @@
                             return `<button onclick="toggleBookmark(${game.id})" style="background: ${isBookmarked ? '#4caf50' : '#1976d2'}; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">${isBookmarked ? '✓ Saved' : '🔖 Save'}</button>`;
                         })()}
                         
-                        ${(game.allowComments !== false) ? `<button onclick="openComments(${game.id})" style="background: #2196f3; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">💬 ${commentCount}</button>` : ''}
+                        ${(game.allowComments !== false) ? `<button onclick="openComments(${game.id})" style="background: #2196f3; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">💬 Comments (${commentCount})</button>` : ''}
                         
                         <!-- More Button -->
-                        <button onclick="toggleMoreActions(${game.id})" style="grid-column: 1 / -1; background: linear-gradient(135deg, #8e24aa, #ab47bc); color: white; padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 3px 8px rgba(142,36,170,0.3);">
+                        <button onclick="toggleMoreActions(${game.id})" style="grid-column: 1 / -1; background: linear-gradient(135deg, #00acc1, #00bcd4); color: white; padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 3px 8px rgba(0,188,212,0.3);">
                             ⋯ More Actions
                         </button>
                         
