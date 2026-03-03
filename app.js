@@ -3940,3 +3940,4 @@
             loadTheme();
             await loadData();
             checkAuth();
+        });
