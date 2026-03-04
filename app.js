@@ -896,59 +896,75 @@
         }
 
         async function postComment() {
+            console.log('🔵 postComment() called');
             const text = document.getElementById('commentInput').value.trim();
+            console.log('Comment text:', text);
             
             if (!text) {
                 alert('⚠️ Please write a comment!');
                 return;
             }
             
-            // Filter profanity
-            const filteredText = filterProfanity(text);
-            
-            if (!appData.comments) appData.comments = [];
-            
-            const newComment = {
-                id: Date.now(),
-                postId: currentCommentPostId,
-                username: currentUser,
-                text: filteredText,
-                date: new Date().toISOString(),
-                replyTo: currentReplyToComment ? currentReplyToComment.id : null,
-                replyToUsername: currentReplyToComment ? currentReplyToComment.username : null
-            };
-            
-            appData.comments.push(newComment);
-            
-            // Send notification to post creator
-            const post = appData.games.find(g => g.id === currentCommentPostId);
-            if (post && post.creator !== currentUser && shouldNotify(post.creator, 'comment')) {
-                createNotification(
-                    post.creator,
-                    'comment',
-                    `${currentUser} commented on your post "${post.title}"`,
-                    currentCommentPostId
-                );
-            }
-            
-            // Send notification to person being replied to (if not the post creator)
-            if (currentReplyToComment && currentReplyToComment.username !== currentUser && currentReplyToComment.username !== post.creator) {
-                createNotification(
-                    currentReplyToComment.username,
-                    'comment',
-                    `${currentUser} replied to your comment on "${post.title}"`,
-                    currentCommentPostId
-                );
-            }
-            
-            if (await saveData()) {
-                document.getElementById('commentInput').value = '';
-                cancelReply(); // Clear reply state
-                loadComments();
-                loadAllContent(); // Refresh to update comment counts
-                debugLog('💬 Comment posted');
-            } else {
-                alert('❌ Failed to post comment');
+            try {
+                console.log('🔵 Creating comment...');
+                
+                // Filter profanity
+                const filteredText = filterProfanity(text);
+                
+                if (!appData.comments) appData.comments = [];
+                
+                const newComment = {
+                    id: Date.now(),
+                    postId: currentCommentPostId,
+                    username: currentUser,
+                    text: filteredText,
+                    date: new Date().toISOString(),
+                    replyTo: currentReplyToComment ? currentReplyToComment.id : null,
+                    replyToUsername: currentReplyToComment ? currentReplyToComment.username : null
+                };
+                
+                console.log('🔵 New comment:', newComment);
+                appData.comments.push(newComment);
+                
+                // Send notification to post creator
+                const post = appData.games.find(g => g.id === currentCommentPostId);
+                if (post && post.creator !== currentUser && shouldNotify(post.creator, 'comment')) {
+                    createNotification(
+                        post.creator,
+                        'comment',
+                        `${currentUser} commented on your post "${post.title}"`,
+                        currentCommentPostId
+                    );
+                }
+                
+                // Send notification to person being replied to (if not the post creator)
+                if (currentReplyToComment && currentReplyToComment.username !== currentUser && currentReplyToComment.username !== post.creator) {
+                    createNotification(
+                        currentReplyToComment.username,
+                        'comment',
+                        `${currentUser} replied to your comment on "${post.title}"`,
+                        currentCommentPostId
+                    );
+                }
+                
+                console.log('🔵 Saving data...');
+                const saved = await saveData();
+                console.log('🔵 Save result:', saved);
+                
+                if (saved) {
+                    document.getElementById('commentInput').value = '';
+                    if (typeof cancelReply === 'function') cancelReply();
+                    loadComments();
+                    loadAllContent();
+                    console.log('✅ Comment posted successfully!');
+                    alert('✅ Comment posted!');
+                } else {
+                    console.error('❌ Save failed');
+                    alert('❌ Failed to save comment');
+                }
+            } catch (error) {
+                console.error('❌ Error in postComment:', error);
+                alert('❌ Error: ' + error.message);
             }
         }
 
