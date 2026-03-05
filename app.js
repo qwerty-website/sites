@@ -828,6 +828,11 @@
 
         // COMMENT FUNCTIONS
         let currentCommentPostId = null;
+        let currentReplyToComment = null;
+
+        function cancelReply() {
+            currentReplyToComment = null;
+        }
 
         function filterProfanity(text) {
             let filtered = text;
@@ -2053,6 +2058,18 @@
                     renderCurrentTags();
                     loadAllContent();
                     loadEditablePostsList();
+                    
+                    // Switch to browse and scroll to the new post
+                    switchTab('browse');
+                    setTimeout(() => {
+                        const card = document.querySelector(`[data-post-id="${newGame.id}"]`);
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.style.outline = '4px solid var(--accent-primary)';
+                            card.style.transition = 'outline 0.5s';
+                            setTimeout(() => { card.style.outline = ''; }, 3000);
+                        }
+                    }, 400);
                 } else {
                     debugLog('❌ Failed to create post');
                     alert('❌ Failed to add post');
@@ -3572,6 +3589,12 @@
 
         // 6. GAMIFICATION (XP & LEVELS)
         const XP_PER_LEVEL = 100;
+        const XP_REWARDS = {
+            create_post: 50,
+            rate_post: 10,
+            receive_rating: 15,
+            comment: 5
+        };
 
         function awardXP(username, amount, reason) {
             if (!appData.xp) appData.xp = {};
